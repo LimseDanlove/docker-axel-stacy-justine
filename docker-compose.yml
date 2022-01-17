@@ -1,0 +1,20 @@
+version: "1.0"
+
+services:
+  #mongodb:
+    
+  #sqldb:
+        
+    
+  details:
+    build: src/details/
+    image: details:latest
+
+  #productpage:
+  
+
+  #ratings:
+
+
+  #reviews:
+
