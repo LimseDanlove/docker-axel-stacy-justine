@@ -1,20 +1,38 @@
 version: "1.0"
 
 services:
-  #mongodb:
-    
-  #sqldb:
+  mongodb:
+    build: src/mongodb/
+    image: mongodb:latest
+
+  sqldb:
+    build: src/mysql/
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD="pass"
         
-    
   details:
     build: src/details/
-    image: details:latest
+    image: details:latest # Nom de l'image créée au compose
+    ports: 
+      - "9080:9080"
+    
 
-  #productpage:
-  
+  productpage:
+    build: src/productpage/
+    image: productpage:latest
+    ports: 
+      - "9090:9080"
 
-  #ratings:
+  ratings:
+    build: src/ratings/
+    image: ratings:latest
+    hostname: "ratings"
+    ports: 
+      - "9070:9080"
 
-
-  #reviews:
+  reviews:
+    build: src/reviews/reviews-wlpcfg
+    image: reviews:latest
+    hostname: "reviews"
 
