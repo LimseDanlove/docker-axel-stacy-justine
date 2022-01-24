@@ -15,24 +15,32 @@ services:
     build: src/details/
     image: details:latest # Nom de l'image créée au compose
     ports: 
-      - "9080:9080"
+      - "9080"
     
-
   productpage:
     build: src/productpage/
     image: productpage:latest
     ports: 
-      - "9090:9080"
+      - "9080:9080"
+#    environment:
+#      REVIEWS_HOSTNAME: "reviews"
+    links:
+      - details
+      - reviews
 
   ratings:
     build: src/ratings/
     image: ratings:latest
-    hostname: "ratings"
     ports: 
-      - "9070:9080"
+      - "9080"
 
   reviews:
-    build: src/reviews/reviews-wlpcfg
+    build: 
+      context: src/reviews/reviews-wlpcfg
+      args:
+        enable_ratings: true
     image: reviews:latest
-    hostname: "reviews"
+    links: 
+      - ratings
+    
 
