@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: details
+  labels:
+    app: fil-rouge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: details
+  template:
+    metadata:
+      labels:
+        app: details
+    spec:
+      containers:
+      - name: details
+        image: localhost:5000/details:latest
+        ports:
+        - containerPort: 9080
