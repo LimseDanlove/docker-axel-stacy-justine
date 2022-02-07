@@ -35,11 +35,7 @@ services:
       - "9080"
 
   reviews:
-    build: 
-      context: src/reviews/reviews-wlpcfg
-      args:
-        enable_ratings: true
-    image: reviews:latest
+    image: docker.io/istio/examples-bookinfo-reviews-v1:latest
     links: 
       - ratings
     
