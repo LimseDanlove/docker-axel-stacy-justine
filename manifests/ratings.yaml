@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratings
+  labels:
+    app: fil-rouge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratings
+  template:
+    metadata:
+      labels:
+        app: ratings
+    spec:
+      containers:
+      - name: ratings
+        image: localhost:5000/ratings:latest
+        ports:
+        - containerPort: 9080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-ratings
+spec:
+  selector:
+    app: ratings
+  ports:
+    - protocol: TCP
+      port: 9080
+      targetPort: 9080

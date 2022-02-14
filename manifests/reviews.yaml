@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reviews
+  labels:
+    app: fil-rouge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews
+  template:
+    metadata:
+      labels:
+        app: reviews
+    spec:
+      containers:
+      - name: reviews
+        image: docker.io/istio/examples-bookinfo-reviews-v1:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-reviews
+spec:
+  selector:
+    app: reviews
+  ports:
+    - protocol: TCP
+      port: 9080
+      targetPort: 9080
