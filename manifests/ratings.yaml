@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: ratings
-        image: localhost:5000/ratings:latest
+        image: ratings:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
 ---

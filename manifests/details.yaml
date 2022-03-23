@@ -16,9 +16,10 @@ spec:
     spec:
       containers:
       - name: details
-        image: localhost:5000/details:latest
+        image: details:latest
         ports:
         - containerPort: 9080
+        imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service

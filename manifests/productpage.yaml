@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: productpage
-        image: localhost:5000/productpage:latest
+        image: productpage:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
 ---
