@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ratings
+  name: ratings-v2
   labels:
     app: fil-rouge
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: ratings
@@ -18,13 +18,53 @@ spec:
       - name: ratings
         image: ratings:latest
         imagePullPolicy: IfNotPresent
+        env:
+        - name: SERVICE_VERSION
+          value: v2
+        - name: DB_TYPE
+          value: mysql
+        - name: MYSQL_DB_HOST
+          value: mysql
+        - name: MYSQL_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root-pwd
+              key: username
+        - name: MYSQL_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root-pwd
+              key: password
         ports:
         - containerPort: 9080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratings-v1
+  labels:
+    app: fil-rouge
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: ratings
+  template:
+    metadata:
+      labels:
+        app: ratings
+    spec:
+      containers:
+        - name: ratings
+          imagePullPolicy: IfNotPresent
+          image: ratings:latest
+          ports:
+            - containerPort: 9080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-ratings
+  name: ratings
 spec:
   selector:
     app: ratings

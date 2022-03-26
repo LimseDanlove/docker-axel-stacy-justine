@@ -17,14 +17,14 @@ spec:
       containers:
       - name: details
         image: details:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
-        imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-details
+  name: details
 spec:
   selector:
     app: details

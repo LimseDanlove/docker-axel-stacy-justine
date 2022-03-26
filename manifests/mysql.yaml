@@ -16,23 +16,29 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: docker.io/istio/examples-bookinfo-mysqldb:1.16.2
         imagePullPolicy: IfNotPresent
+        image: docker.io/istio/examples-bookinfo-mysqldb:1.16.2
+        args: ["--default-authentication-plugin","mysql_native_password"]
         env:
+        #- name: MYSQL_ROOT_PASSWORD
+        #  value: "pass"
         - name: MYSQL_ROOT_PASSWORD
-          value: "pass"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root-pwd
+              key: password
         volumeMounts:
-          - mountPath: "/var/lib/mysql"
-            name: data-volume
+          - mountPath: /var/lib/mysql
+            name: mysql-volume
       volumes:
-        - name: data-volume
-          hostPath:
-            path: "/var/lib/mysql"
+      - name: mysql-volume
+        hostPath:
+          path: "/var/lib/mysql"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-mysql
+  name: mysql
 spec:
   selector:
     app: mysql
