@@ -18,6 +18,22 @@ spec:
       - name: reviews
         imagePullPolicy: IfNotPresent
         image: docker.io/istio/examples-bookinfo-reviews-v2:1.16.2
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          periodSeconds: 2
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /reviews # sans définition de endpoint /ready, oncheck avec /reviews
+            port: 9080
+          periodSeconds: 2
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          successThreshold: 1
 
 ---
 apiVersion: v1

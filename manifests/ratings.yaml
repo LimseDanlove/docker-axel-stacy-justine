@@ -5,7 +5,7 @@ metadata:
   labels:
     app: fil-rouge
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: ratings
@@ -38,6 +38,22 @@ spec:
               key: password
         ports:
         - containerPort: 9080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          periodSeconds: 2
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /ratings # sans définition de endpoint /ready, oncheck avec /ratings
+            port: 9080
+          periodSeconds: 2
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          successThreshold: 1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -47,7 +63,7 @@ metadata:
     app: fil-rouge
     version: '1'
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: ratings
