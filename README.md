@@ -25,7 +25,7 @@ A la racine du projet est présent le fichier `docker-compose.yml`.
 Les manifests des services sont disponibles dans le dossier `manifest/` à la racine du projet.
 
 ## Informations complémentaires
-Pour toute information complémentaire (étapes de travail, commandes utilisées, solution utilisée pour l'hébergement des images, ...), veuillez vous référer au document `CR.md` à la racine du projet.
+Pour toute information complémentaire (étapes de travail, commandes utilisées, solution utilisée pour l'hébergement des images, ...), veuillez vous référer au document `CR.md` à la racine du projet. Ce document présente simplement le déroulé des TPs, sans travail excessif sur la forme.
 
 Enjoy :)
 
