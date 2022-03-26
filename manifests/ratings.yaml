@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: ratings
+        version: '2'
     spec:
       containers:
       - name: ratings
@@ -44,6 +45,7 @@ metadata:
   name: ratings-v1
   labels:
     app: fil-rouge
+    version: '1'
 spec:
   replicas: 5
   selector:
@@ -53,6 +55,7 @@ spec:
     metadata:
       labels:
         app: ratings
+        version: '1'
     spec:
       containers:
         - name: ratings
@@ -68,6 +71,7 @@ metadata:
 spec:
   selector:
     app: ratings
+    version: '2'
   ports:
     - protocol: TCP
       port: 9080

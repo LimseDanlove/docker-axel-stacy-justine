@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: mongodb
+        imagePullPolicy: IfNotPresent
         image: docker.io/istio/examples-bookinfo-mongodb:1.16.2
         volumeMounts:
         - mountPath: /data/db

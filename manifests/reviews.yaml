@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: reviews
+        imagePullPolicy: IfNotPresent
         image: docker.io/istio/examples-bookinfo-reviews-v2:1.16.2
 
 ---
